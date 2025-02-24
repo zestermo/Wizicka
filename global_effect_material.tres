@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ob5t06irh7tc"]
+
+[ext_resource type="Shader" path="res://graphics.gdshader" id="1_lg7qf"]
+
+[resource]
+shader = ExtResource("1_lg7qf")
+shader_parameter/VIEWPORT_SIZE = null
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 8
+shader_parameter/dither_size = 3

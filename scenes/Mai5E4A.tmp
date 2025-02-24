@@ -1,0 +1,81 @@
+[gd_scene load_steps=17 format=3 uid="uid://bgkr758x8ibwy"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_r2j8x"]
+[ext_resource type="PackedScene" uid="uid://chvhnkwynrexp" path="res://scenes/player.tscn" id="2_mnpp8"]
+[ext_resource type="Texture2D" uid="uid://didc2rhb3wfen" path="res://silkorange_A_2d_grass_texture_--v_6.1_2ee41f9f-3874-4884-812d-b0855fd0d522_0.png" id="2_yd1ce"]
+[ext_resource type="Shader" path="res://shaders/Main.gdshader" id="3_d5g5q"]
+[ext_resource type="PackedScene" uid="uid://bfvrj3wkqfkal" path="res://tree_01.tscn" id="3_tsxc4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mmcth"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f3q3h"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wmfqi"]
+in_3d_space = true
+noise = SubResource("FastNoiseLite_f3q3h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_reqa5"]
+render_priority = 0
+shader = ExtResource("3_d5g5q")
+shader_parameter/height_scale = 2.0
+shader_parameter/uv_scale = Vector2(100, 100)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_wmfqi")
+shader_parameter/albedo_texture = ExtResource("2_yd1ce")
+
+[sub_resource type="GDScript" id="GDScript_tsk25"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jmriw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c7qt6"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_jmriw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mtyhd"]
+render_priority = 0
+shader = ExtResource("3_d5g5q")
+shader_parameter/height_scale = 2.0
+shader_parameter/uv_scale = Vector2(5, 5)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_c7qt6")
+script = SubResource("GDScript_tsk25")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ift8l"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("ShaderMaterial_mtyhd")
+subdivide_width = 513
+subdivide_depth = 512
+
+[sub_resource type="Sky" id="Sky_o4wxh"]
+
+[sub_resource type="Environment" id="Environment_lc85i"]
+background_mode = 3
+sky = SubResource("Sky_o4wxh")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_r2j8x")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+shape = SubResource("BoxShape3D_mmcth")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_reqa5")
+mesh = SubResource("PlaneMesh_ift8l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+light_color = Color(1, 1, 0.937255, 1)
+light_energy = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lc85i")
+
+[node name="Player" parent="." instance=ExtResource("2_mnpp8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50866, 0)
+
+[node name="tree01" parent="." instance=ExtResource("3_tsxc4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.68307, 1.1088, 4.34806)

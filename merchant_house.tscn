@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6sxthln6jpp1"]
+
+[ext_resource type="PackedScene" uid="uid://bl888q2j4evcl" path="res://sample (1).glb" id="1_fy5fh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ojhfo"]
+size = Vector3(0.95, 0.06, 0.955)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s7q4p"]
+height = 0.071
+radius = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d5lyb"]
+size = Vector3(0.76, 0.775, 0.595)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_whgg2"]
+size = Vector3(0.829905, 0.05, 0.391914)
+
+[node name="sample (1)" instance=ExtResource("1_fy5fh")]
+
+[node name="geometry_0" parent="world" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475847, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="world/geometry_0" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/geometry_0/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.477199, 0)
+shape = SubResource("BoxShape3D_ojhfo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="world/geometry_0/StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.400499, -0.409741, 0.286403)
+shape = SubResource("CylinderShape3D_s7q4p")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="world/geometry_0/StaticBody3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.388883, -0.409741, 0.147395)
+shape = SubResource("CylinderShape3D_s7q4p")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="world/geometry_0" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/geometry_0/StaticBody3D2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0640536, -0.0861969, -0.0766034)
+shape = SubResource("BoxShape3D_d5lyb")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="world/geometry_0" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302675, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/geometry_0/StaticBody3D3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.876559, -0.481295, 0, 0.481295, 0.876559, -0.0603402, 0.0655839, 0.079204)
+shape = SubResource("BoxShape3D_whgg2")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="world/geometry_0/StaticBody3D3" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.302675, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/geometry_0/StaticBody3D3/StaticBody3D3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.886906, 0.46195, 0, -0.46195, 0.886906, -0.0540793, -0.241874, -0.245915)
+shape = SubResource("BoxShape3D_whgg2")
