@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://dbmr2hw3vfkk4"]
+
+[ext_resource type="PackedScene" uid="uid://chvhnkwynrexp" path="res://scenes/player.tscn" id="1_mkghv"]
+[ext_resource type="Script" path="res://scenes/new_player.gd" id="2_0a2qs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rmf72"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4japs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xk16i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gblqa"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5ants"]
+top_radius = 0.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kkpoa"]
+sky_top_color = Color(0.472511, 0.459265, 1, 1)
+sky_horizon_color = Color(0.62068, 0.82087, 1, 1)
+
+[sub_resource type="Sky" id="Sky_utwkh"]
+sky_material = SubResource("ProceduralSkyMaterial_kkpoa")
+
+[sub_resource type="Environment" id="Environment_5mylg"]
+background_mode = 2
+sky = SubResource("Sky_utwkh")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Ground" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.508808, 0.72406)
+shape = SubResource("BoxShape3D_rmf72")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, -0.497601, 0)
+mesh = SubResource("BoxMesh_4japs")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Node3D" type="Node3D" parent="Ground"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59984, 0.304492, -2.35177)
+mesh = SubResource("BoxMesh_xk16i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59984, 0.304492, -2.35177)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Node3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_gblqa")
+
+[node name="Player" parent="." instance=ExtResource("1_mkghv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36686, 0)
+script = ExtResource("2_0a2qs")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.632973, 0, 0, 0, 0.000189138, -0.781483, 0, 0.63754, 0.000231841, -0.000990868, 0.315493, 0.314644)
+mesh = SubResource("CylinderMesh_5ants")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.433628, 0.901092, 0, -0.901092, 0.433628, 0, 16.3141, 18.7882)
+light_energy = 1.675
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5mylg")
+
+[editable path="Player"]
