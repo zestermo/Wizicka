@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coywaf2rak02b"
+uid="uid://lutc7axok3gu"
 path.s3tc="res://.godot/imported/crates_0.png-fa19f8ac5a2be1fcf0e806f3d17c2a2d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "aca60ce19671cbf14a506a0abb493916"
 }
 
 [deps]

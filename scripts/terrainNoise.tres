@@ -1,6 +1,6 @@
 [gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://ceuvyobhtl24c"]
 
-[ext_resource type="FastNoiseLite" uid="uid://b2pkobmbfwe2" path="res://new_fast_noise_lite.tres" id="1_mefko"]
+[ext_resource type="FastNoiseLite" uid="uid://b2pkobmbfwe2" path="res://shaders/new_fast_noise_lite.tres" id="1_mefko"]
 
 [resource]
 in_3d_space = true

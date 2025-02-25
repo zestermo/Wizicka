@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dbmr2hw3vfkk4"]
 
-[ext_resource type="PackedScene" uid="uid://chvhnkwynrexp" path="res://scenes/player.tscn" id="1_mkghv"]
-[ext_resource type="Script" path="res://scenes/new_player.gd" id="2_0a2qs"]
+[ext_resource type="PackedScene" uid="uid://chvhnkwynrexp" path="res://scenes/player.tscn" id="1_0pdqr"]
+[ext_resource type="Script" path="res://scenes/new_player.gd" id="2_jl12r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rmf72"]
 size = Vector3(30, 1, 30)
@@ -53,9 +53,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59984, 0.304492, -2.35177)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Node3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_gblqa")
 
-[node name="Player" parent="." instance=ExtResource("1_mkghv")]
+[node name="Player" parent="." instance=ExtResource("1_0pdqr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36686, 0)
-script = ExtResource("2_0a2qs")
+script = ExtResource("2_jl12r")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(0.632973, 0, 0, 0, 0.000189138, -0.781483, 0, 0.63754, 0.000231841, -0.000990868, 0.315493, 0.314644)

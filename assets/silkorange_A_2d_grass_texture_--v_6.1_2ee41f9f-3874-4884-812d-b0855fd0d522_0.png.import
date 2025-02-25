@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4d8rve7nxrlw"
-path.s3tc="res://.godot/imported/entryarch_0.png-3c7e4f560025c6e1b1a240e74eda7c9a.s3tc.ctex"
+uid="uid://cuox034ahp8rt"
+path.s3tc="res://.godot/imported/silkorange_A_2d_grass_texture_--v_6.1_2ee41f9f-3874-4884-812d-b0855fd0d522_0.png-c7c1c89b289c04c817598560e68a7bc5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "74c784fc21b84c201e813c73bb848584"
-}
 
 [deps]
 
-source_file="res://entryarch_0.png"
-dest_files=["res://.godot/imported/entryarch_0.png-3c7e4f560025c6e1b1a240e74eda7c9a.s3tc.ctex"]
+source_file="res://assets/silkorange_A_2d_grass_texture_--v_6.1_2ee41f9f-3874-4884-812d-b0855fd0d522_0.png"
+dest_files=["res://.godot/imported/silkorange_A_2d_grass_texture_--v_6.1_2ee41f9f-3874-4884-812d-b0855fd0d522_0.png-c7c1c89b289c04c817598560e68a7bc5.s3tc.ctex"]
 
 [params]
 
