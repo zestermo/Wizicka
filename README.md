@@ -1,4 +1,4 @@
-![demo image 1](images/title.png)
+<img src="images/title.png" alt="Description" width="50%">
 # 🧙‍♂️ Wizicka - A Magical Adventure ✨
 
 Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players harness the power of arcane magic to explore a mystical world, uncover secrets, and battle formidable foes. With an immersive environment, deep spell-casting mechanics, and a rich fantasy atmosphere, *Wizicka* is designed to captivate players with its engaging gameplay and fluid mechanics.
