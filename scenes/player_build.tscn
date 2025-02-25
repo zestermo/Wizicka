@@ -54,13 +54,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59984, 0.304492, -2.35177)
 shape = SubResource("BoxShape3D_gblqa")
 
 [node name="Player" parent="." instance=ExtResource("1_0pdqr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36686, 0)
+transform = Transform3D(-0.999882, 0, -0.0153756, 0, 1, 0, 0.0153756, 0, -0.999882, 0, 1.36686, 0)
 script = ExtResource("2_jl12r")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
+[node name="MeshInstance3D" parent="Player" index="1"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/MeshInstance3D" index="0"]
 transform = Transform3D(0.632973, 0, 0, 0, 0.000189138, -0.781483, 0, 0.63754, 0.000231841, -0.000990868, 0.315493, 0.314644)
 mesh = SubResource("CylinderMesh_5ants")
-skeleton = NodePath("../MeshInstance3D")
+
+[node name="CameraPivot" parent="Player" index="2"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.433628, 0.901092, 0, -0.901092, 0.433628, 0, 16.3141, 18.7882)

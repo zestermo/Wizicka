@@ -8,10 +8,6 @@
 
 config_version=5
 
-[Magyk]
-
-config/ninetailsrabbit.terrainy/update_notification_enabled=true
-
 [addons]
 
 m_terrain/keymap/mterrain_brush_size_increase=Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":true,"keycode":93,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
