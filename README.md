@@ -8,15 +8,15 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 ---
 ## 🌟 Features (Planned & Implemented)
 
-✅ **Spellcasting System** – Cast powerful elemental spells using a dynamic magic system.  
-✅ **Open World Exploration** – Traverse diverse landscapes filled with secrets and hidden paths.  
+🔲 **Spellcasting System** – Cast powerful elemental spells using a dynamic magic system.  
+🔲 **Open World Exploration** – Traverse diverse landscapes filled with secrets and hidden paths.  
 ✅ **Physics-Based Interactions** – A world that reacts naturally to player actions.  
-✅ **AI-Driven Enemies** – Intelligent enemies with unique attack patterns and behaviors.  
+🔲 **AI-Driven Enemies** – Intelligent enemies with unique attack patterns and behaviors.  
 ✅ **Dynamic Camera System** – Smooth, responsive camera movement to enhance immersion.  
-✅ **Player Customization** – Unlock and equip different magical abilities.  
-✅ **Procedural Terrain & Environments** – Vast, varied landscapes dynamically generated.  
-✅ **Multiplayer Mode (Planned)** – Cooperative gameplay for magical duels or team-based challenges.  
-✅ **Rich Lore & Storytelling** – Uncover the mysteries of the world through NPCs, books, and artifacts.  
+🔲 **Player Customization** – Unlock and equip different magical abilities.  
+✅ **Procedural Terrain & Environments** – HALFWAY COMPLETE - Vast, varied landscapes dynamically generated.  
+🔲 **Multiplayer Mode (Planned)** – Cooperative gameplay for magical duels or team-based challenges.  
+🔲 **Rich Lore & Storytelling** – Uncover the mysteries of the world through NPCs, books, and artifacts.  
 
 ---
 
