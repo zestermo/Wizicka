@@ -8,4 +8,4 @@ shader_parameter/VIEWPORT_SIZE = null
 shader_parameter/enabled = true
 shader_parameter/dithering = true
 shader_parameter/colors = 8
-shader_parameter/dither_size = 3
+shader_parameter/dither_size = 2

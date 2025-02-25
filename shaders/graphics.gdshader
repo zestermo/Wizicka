@@ -3,7 +3,7 @@ uniform sampler2D SCREEN_TEXTURE;
 uniform vec2 VIEWPORT_SIZE;
 render_mode unshaded;
 
-#define MAXCOLORS 16
+#define MAXCOLORS 8
 const int pixel_size = 4; //resolution must be divisible by pixel_size
 uniform bool enabled = true;
 uniform bool dithering = true;
