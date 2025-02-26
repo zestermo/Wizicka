@@ -45,3 +45,7 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 1. Clone the repository:
    ```sh
    git clone https://github.com/zestermo/wizicka.git
+
+## Collaborators
+
+🦈 graysalt 🦈 Creative Development & 3D Asset Artist
