@@ -76,7 +76,7 @@ m_terrain/keymap/mpath_lock_z=Object(InputEventKey,"resource_local_to_scene":fal
 [application]
 
 config/name="Magyk"
-run/main_scene="res://scenes/player_build.tscn"
+run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

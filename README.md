@@ -1,4 +1,4 @@
-<img src="images/title.png" alt="Description" width="50%" style="justify-content:center; align-items:center;">
+<img src="images/title.png" alt="Description" width="50%">
 # 🧙‍♂️ Wizicka - A Magical Adventure ✨
 
 Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players harness the power of arcane magic to explore a mystical world, uncover secrets, and battle formidable foes. With an immersive environment, deep spell-casting mechanics, and a rich fantasy atmosphere, *Wizicka* is designed to captivate players with its engaging gameplay and fluid mechanics.
@@ -32,6 +32,12 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 - ⚡ **Physics**: Godot’s built-in physics system  
 
 ---
+
+##Changelog
+
+- v0.02: Created initial starter area, with terrain, collision, lighting, and finished v1 of the third person player controller. Added placeholder player model and basic movement animations. 2.26.25
+
+- v0.01: Created basic starter area with a few assets and some trees, unfinished collision, place holder player character and unfinished player controller script. finished with v1 of the game world shaders (psx style dithering and pixelation).
 
 ## 🚀 Installation & Running the Game
 
