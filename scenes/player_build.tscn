@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b3k1hxawdkpib" path="res://animations/Idle.fbx" id="3_d1ch2"]
 [ext_resource type="Animation" uid="uid://dcnj3ju0ko5bu" path="res://animations/idle.res" id="4_tt2hu"]
 [ext_resource type="Animation" uid="uid://d1pgqa00j644x" path="res://animations/jog.res" id="5_sa3mq"]
-[ext_resource type="Animation" uid="uid://b8xv01p83uv65" path="res://assets/run.res" id="6_p0s03"]
+[ext_resource type="Animation" uid="uid://b8xv01p83uv65" path="res://animations/run.res" id="6_p0s03"]
 [ext_resource type="Animation" uid="uid://drijar4b4kynp" path="res://animations/falling.res" id="7_5gp44"]
 [ext_resource type="Animation" uid="uid://d4gaw1kjbd4gk" path="res://animations/jump_start.res" id="9_374kg"]
 [ext_resource type="Animation" uid="uid://bsqvdq2826pih" path="res://animations/jumping.res" id="9_l1h8x"]
