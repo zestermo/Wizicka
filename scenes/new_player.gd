@@ -3,10 +3,12 @@ extends CharacterBody3D
 const BASE_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 10.5
-const FRICTION = 50.0  # Higher = more grip
+const FRICTION = 80.0  # Higher = more grip
 const AIR_CONTROL = 0.3  # Reduces movement control in mid-air
 const LEAN_AMOUNT = 0.2  # How much the character leans
 const LEAN_SPEED = 10.0  # How fast the lean engages/resets
+const MAX_COMBAT_ROTATION = 0.4  # Maximum left/right rotation in combat stance
+const ANIMATION_BLEND_TIME = 0.2  # Smooth animation transition time
 
 @export var move_speed = BASE_SPEED  # Default to walking speed
 @export var turn_speed = 5.0
@@ -17,10 +19,18 @@ const LEAN_SPEED = 10.0  # How fast the lean engages/resets
 @export var player_model: Node3D
 @export var camera_pivot: Node3D  # Assign this to the Node3D that rotates with the camera
 @export var anim_player: AnimationPlayer  # Assign the AnimationPlayer in the inspector
+@export var reticle: Node3D  # Assign the 3D reticle target the player should always face
 
 var is_jumping = false  # Tracks if the player is jumping
 var has_played_jump = false  # Ensures jump animation plays first before falling
 var lean_target = 0.0  # Stores desired lean angle
+
+var combat_stance = false  # Tracks whether combat stance is active
+var combat_rotation = 0.0  # Stores slight side rotation in combat stance
+
+func _input(event):
+	if event.is_action_pressed("combat_stance"):
+		combat_stance = !combat_stance  # Toggle combat mode
 
 func _physics_process(delta: float) -> void:
 	# Apply gravity
@@ -30,12 +40,12 @@ func _physics_process(delta: float) -> void:
 		# Ensure we play jump first before falling
 		if !has_played_jump:
 			has_played_jump = true
-			anim_player.play("player/jump_start")
+			_play_animation("player/jump_start")
 		elif has_played_jump and anim_player.current_animation != "player/jump_start":
-			anim_player.play("player/falling")
+			_play_animation("player/falling")
 
 	# Check if the sprint button (Shift) is pressed
-	if Input.is_action_pressed("sprint"):
+	if Input.is_action_pressed("sprint") and not combat_stance:
 		move_speed = SPRINT_SPEED  # Increase speed when sprinting
 	else:
 		move_speed = BASE_SPEED  # Return to normal speed
@@ -45,9 +55,8 @@ func _physics_process(delta: float) -> void:
 		is_jumping = true
 		has_played_jump = false  # Reset so jump animation plays
 		velocity.y = JUMP_VELOCITY
-
 		# Play jump animation immediately
-		anim_player.play("player/jump_start")
+		_play_animation("player/jump_start")
 
 	# Get input direction
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -65,59 +74,77 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		current_acceleration *= AIR_CONTROL  # Reduce movement control in air
 
-	# Handle movement
-	if move_dir.length() > 0.01:
-		velocity.x = move_toward(velocity.x, move_dir.x * move_speed, current_acceleration * delta)
-		velocity.z = move_toward(velocity.z, move_dir.z * move_speed, current_acceleration * delta)
+	if combat_stance:
+		# 🛑 Combat Mode: Always Face Camera Reticle
+		if reticle:
+			var target_direction = (reticle.global_transform.origin - player_model.global_transform.origin).normalized()
+			player_model.look_at(player_model.global_transform.origin - target_direction, Vector3.UP)
 
-		# Rotate player model towards movement direction
-		var target_rotation = atan2(-move_dir.x, -move_dir.z)  
-		var current_rotation = player_model.rotation.y
-		player_model.rotation.y = lerp_angle(current_rotation, target_rotation, turn_speed * delta)
+		# Movement in combat stance
+		if move_dir.length() > 0.01:
+			velocity.x = move_toward(velocity.x, move_dir.x * move_speed, current_acceleration * delta)
+			velocity.z = move_toward(velocity.z, move_dir.z * move_speed, current_acceleration * delta)
 
-		# Handle animations **only if not jumping**
-		if is_on_floor() and not is_jumping:
-			if move_speed > BASE_SPEED:
-				_play_animation("player/run")  # Play run animation if sprinting
+			# 🔄 Reverse jogging animation when moving backward in combat stance
+			if input_dir.y > 0:  # Pressing "S" (move_back)
+				_play_animation("player/jog", -1.0)  # Reverse animation
 			else:
-				_play_animation("player/jog")  # Play jog animation if walking
-	else:
-		# Apply friction when no input is detected
-		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
-		velocity.z = move_toward(velocity.z, 0, FRICTION * delta)
+				_play_animation("player/jog", 1.0)  # Normal animation speed
 
-		# Play idle animation when not moving and not jumping
-		if is_on_floor() and not is_jumping:
-			_play_animation("player/idle")
+			# 🌀 **Slight rotation when moving left/right in combat**
+			var side_movement = input_dir.x  # Left (-1) or Right (+1)
+			combat_rotation = lerp(combat_rotation, side_movement * MAX_COMBAT_ROTATION, delta * turn_speed)
+
+		else:
+			velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+			velocity.z = move_toward(velocity.z, 0, FRICTION * delta)
+			_play_animation("player/idle")  # Stand still in combat stance
+
+		# Apply **limited combat rotation** while still facing the reticle
+		player_model.rotation.y += combat_rotation * delta * turn_speed
+
+	else:
+		# 🌀 Free rotation outside combat stance
+		if move_dir.length() > 0.01:
+			velocity.x = move_toward(velocity.x, move_dir.x * move_speed, current_acceleration * delta)
+			velocity.z = move_toward(velocity.z, move_dir.z * move_speed, current_acceleration * delta)
+
+			# Rotate player model towards movement direction
+			var target_rotation = atan2(-move_dir.x, -move_dir.z)  
+			var current_rotation = player_model.rotation.y
+			player_model.rotation.y = lerp_angle(current_rotation, target_rotation, turn_speed * delta)
+
+			# Handle animations **only if not jumping**
+			if is_on_floor() and not is_jumping:
+				if move_speed > BASE_SPEED:
+					_play_animation("player/run")  # Play run animation if sprinting
+				else:
+					_play_animation("player/jog")  # Play jog animation if walking
+		else:
+			velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+			velocity.z = move_toward(velocity.z, 0, FRICTION * delta)
+			#_play_animation("player/idle")  # Play idle when stopping
+	if (velocity.x == 0 && velocity.z == 0) && is_on_floor():
+		_play_animation("player/idle")
 
 	# Reset jumping state **only when landing**
 	if is_on_floor() and is_jumping:
 		is_jumping = false  # Reset jump flag
 		has_played_jump = false  # Reset jump state so it can play again
 		_play_animation("player/idle")  # Play idle when landing
-
-	# **Leaning System: Only When Pressing "A" or "D"**
-	var forward_dir = camera_pivot.global_transform.basis.z  # Camera's forward direction
-	var move_direction = velocity.normalized()  # Player's movement direction
-	var facing_forward = forward_dir.dot(move_direction) < 0  # Check if moving forward
-
-	if Input.is_action_pressed("move_left"):
-		lean_target = LEAN_AMOUNT if facing_forward else -LEAN_AMOUNT  # Lean left (flip if moving backward)
-	elif Input.is_action_pressed("move_right"):
-		lean_target = -LEAN_AMOUNT if facing_forward else LEAN_AMOUNT  # Lean right (flip if moving backward)
-	else:
-		lean_target = 0.0  # Reset lean when keys are released
-	# Smoothly interpolate to target lean
-	player_model.rotation.z = lerp(player_model.rotation.z, lean_target, LEAN_SPEED * delta)
-
+		
 	move_and_slide()
 
-# Function to play animations without restarting the same one
-func _play_animation(anim_name: String) -> void:
-	# Don't override jump/falling animation if still in the air
-	if is_jumping and anim_name not in ["player/jump_start", "player/falling"]:
-		return
+# Function to smoothly transition between animations
+func _play_animation(anim_name: String, speed: float = 1.0) -> void:
+	# Ensure jump animations **always** play, even when standing still
+	#print(anim_name)
+	if anim_name in ["player/jump_start", "player/falling"]:
+		anim_player.play(anim_name, -1, speed)
+		anim_player.advance(ANIMATION_BLEND_TIME)  # Smoothly transition
+		return  # Skip further checks so it **always plays**
 
-	# Play animation only if it's not already playing
+	# Only play animation if it's different from the current one
 	if anim_player and anim_player.current_animation != anim_name:
-		anim_player.play(anim_name)
+		anim_player.play(anim_name, -1, speed)
+		anim_player.advance(ANIMATION_BLEND_TIME)  # Smoothly transition
