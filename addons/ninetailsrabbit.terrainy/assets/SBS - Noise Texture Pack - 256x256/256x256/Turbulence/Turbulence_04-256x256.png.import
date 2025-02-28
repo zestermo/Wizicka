@@ -3,25 +3,26 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfhmya2q7ftrt"
-path="res://.godot/imported/Turbulence_04-256x256.png-5e2c1a9d0f83d1443c2e6da19bb79c42.ctex"
+path.s3tc="res://.godot/imported/Turbulence_04-256x256.png-5e2c1a9d0f83d1443c2e6da19bb79c42.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/ninetailsrabbit.terrainy/assets/SBS - Noise Texture Pack - 256x256/256x256/Turbulence/Turbulence_04-256x256.png"
-dest_files=["res://.godot/imported/Turbulence_04-256x256.png-5e2c1a9d0f83d1443c2e6da19bb79c42.ctex"]
+dest_files=["res://.godot/imported/Turbulence_04-256x256.png-5e2c1a9d0f83d1443c2e6da19bb79c42.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dghafbo1bftm3"]
+
+[ext_resource type="PackedScene" uid="uid://cior16w1k1cyk" path="res://assets/models/Tree2.glb" id="1_vbebi"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j6q74"]
+height = 0.94687
+radius = 0.119466
+
+[node name="Tree2" instance=ExtResource("1_vbebi")]
+
+[node name="geometry_0" parent="world" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.494342, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48633, 0.0194379)
+shape = SubResource("CylinderShape3D_j6q74")

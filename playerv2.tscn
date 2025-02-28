@@ -1,0 +1,189 @@
+[gd_scene load_steps=11 format=3 uid="uid://gvlo6b7vrcb5"]
+
+[ext_resource type="PackedScene" uid="uid://gbxothbwpvrp" path="res://assets/characters/player/animations/Man_01_02.fbx" id="1_qwqeu"]
+[ext_resource type="Script" path="res://assets/characters/player/animations/foot_ik.gd" id="2_ukmlf"]
+[ext_resource type="Animation" uid="uid://drijar4b4kynp" path="res://assets/characters/player/animations/falling.res" id="3_8vc3e"]
+[ext_resource type="Animation" uid="uid://dcnj3ju0ko5bu" path="res://assets/characters/player/animations/idle.res" id="4_quv14"]
+[ext_resource type="Animation" uid="uid://d1pgqa00j644x" path="res://assets/characters/player/animations/jog.res" id="5_ncd4p"]
+[ext_resource type="Animation" uid="uid://d4gaw1kjbd4gk" path="res://assets/characters/player/animations/jump_start.res" id="6_rltrw"]
+[ext_resource type="Animation" uid="uid://b8xv01p83uv65" path="res://assets/characters/player/animations/run.res" id="7_0d86t"]
+[ext_resource type="Texture2D" uid="uid://on7q15r0muyi" path="res://assets/characters/player/reticlewhite.png" id="8_vc7kr"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjpom"]
+_data = {
+"falling": ExtResource("3_8vc3e"),
+"idle": ExtResource("4_quv14"),
+"jog": ExtResource("5_ncd4p"),
+"jump_start": ExtResource("6_rltrw"),
+"run": ExtResource("7_0d86t")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev5m0"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00091, 0)
+
+[node name="playermodel" parent="." node_paths=PackedStringArray("left_foot_target", "right_foot_target", "left_raycast", "right_raycast", "left_skeleton_ik", "right_skeleton_ik", "left_hand_ik", "right_hand_ik", "torso_ik", "reticle") instance=ExtResource("1_qwqeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.00122, 0)
+script = ExtResource("2_ukmlf")
+left_foot_target = NodePath("metarig/Skeleton3D/LeftFoot")
+right_foot_target = NodePath("metarig/Skeleton3D/RightFoot")
+left_raycast = NodePath("metarig/Skeleton3D/LeftFoot/RayCast3D")
+right_raycast = NodePath("metarig/Skeleton3D/RightFoot/RayCast3D")
+left_skeleton_ik = NodePath("metarig/Skeleton3D/LeftLeg")
+right_skeleton_ik = NodePath("metarig/Skeleton3D/RightLeg")
+left_hand_ik = NodePath("metarig/Skeleton3D/LeftArm")
+right_hand_ik = NodePath("metarig/Skeleton3D/RightArm")
+torso_ik = NodePath("metarig/Skeleton3D/Torso")
+reticle = NodePath("../Control/TextureRect")
+
+[node name="metarig" parent="playermodel" index="0"]
+transform = Transform3D(73.5261, 67.7253, 2.67999, 3.52013, -7.76438, 99.636, 67.6869, -73.1641, -8.09288, -0.0105655, -0.159905, 0.0573028)
+
+[node name="Skeleton3D" parent="playermodel/metarig" index="0"]
+bones/1/rotation = Quaternion(0.0694278, -0.00863556, -0.0350887, 0.996932)
+bones/2/rotation = Quaternion(0.218884, 0.0025067, -0.067241, 0.973428)
+bones/3/rotation = Quaternion(0.217595, 0.00774806, -0.0598731, 0.97417)
+bones/4/rotation = Quaternion(0.413203, 0.00796677, -0.0215174, 0.91035)
+bones/5/rotation = Quaternion(-0.280493, 0.00505791, -0.0223806, 0.959582)
+bones/7/rotation = Quaternion(0.238425, 0.112769, 0.644279, -0.717873)
+bones/8/rotation = Quaternion(0.161376, -0.000192297, -0.0737607, 0.984133)
+bones/9/rotation = Quaternion(0.0728658, -0.088774, 0.256748, 0.95963)
+bones/10/rotation = Quaternion(0.0641311, 0.732331, 0.0882245, 0.672157)
+bones/11/rotation = Quaternion(0.142649, -0.0121698, 0.00940705, 0.989654)
+bones/12/rotation = Quaternion(-1.2359e-08, -0.0253051, 2.67755e-08, 0.99968)
+bones/14/rotation = Quaternion(0.226784, 0.930111, 0.246082, -0.151352)
+bones/15/rotation = Quaternion(0.000850914, -0.052891, -0.00736438, 0.998573)
+bones/16/rotation = Quaternion(3.49278e-08, -0.00122702, -5.38548e-08, 0.999999)
+bones/18/rotation = Quaternion(0.0354485, 0.716133, -0.0849, 0.691874)
+bones/19/rotation = Quaternion(0.189559, -0.0445082, 0.016165, 0.980727)
+bones/20/rotation = Quaternion(-1.7367e-07, -0.027503, -6.75209e-09, 0.999622)
+bones/22/rotation = Quaternion(0.0949005, 0.639678, -0.221571, 0.729872)
+bones/23/rotation = Quaternion(0.276532, -0.0242565, -0.00595077, 0.96068)
+bones/24/rotation = Quaternion(1.15118e-07, -0.0487, -9.17353e-08, 0.998813)
+bones/26/rotation = Quaternion(0.0661933, 0.568723, -0.270522, 0.773945)
+bones/27/rotation = Quaternion(0.337394, -0.00146557, -0.0402581, 0.940501)
+bones/28/rotation = Quaternion(5.93259e-09, -0.0135305, 6.72881e-08, 0.999909)
+bones/30/rotation = Quaternion(-0.318312, -0.00401473, 0.638133, 0.701034)
+bones/31/rotation = Quaternion(0.2406, -0.0530806, 0.0266816, 0.968805)
+bones/32/rotation = Quaternion(-0.00447096, 0.0234303, -0.277688, 0.960375)
+bones/33/rotation = Quaternion(0.0235679, -0.731687, -0.0295923, 0.68059)
+bones/34/rotation = Quaternion(0.147449, 0.0116576, -0.00711769, 0.988975)
+bones/35/rotation = Quaternion(2.07526e-08, 0.0253051, 1.18278e-07, 0.99968)
+bones/37/rotation = Quaternion(-0.149538, 0.947355, 0.282688, 0.0156321)
+bones/38/rotation = Quaternion(0.182983, 0.0542918, -0.00938716, 0.981571)
+bones/39/rotation = Quaternion(-2.70988e-08, 0.0012269, 5.52518e-08, 0.999999)
+bones/41/rotation = Quaternion(0.0675426, -0.708262, 0.030209, 0.702061)
+bones/42/rotation = Quaternion(0.263378, 0.0438202, -0.0195584, 0.963499)
+bones/43/rotation = Quaternion(-6.90426e-08, 0.027503, 2.07219e-08, 0.999622)
+bones/45/rotation = Quaternion(0.0857079, -0.667422, 0.119868, 0.729955)
+bones/46/rotation = Quaternion(0.322199, 0.0231971, 0.00114696, 0.946387)
+bones/47/rotation = Quaternion(2.03513e-08, 0.0487, -3.77186e-08, 0.998814)
+bones/49/rotation = Quaternion(0.0684763, -0.60265, 0.158135, 0.779177)
+bones/50/rotation = Quaternion(0.355083, 0.000395138, 0.0252611, 0.934493)
+bones/51/rotation = Quaternion(-9.15964e-09, 0.0135306, 3.73693e-08, 0.999908)
+bones/53/rotation = Quaternion(0.642914, 0.10915, -0.110485, 0.750027)
+bones/54/rotation = Quaternion(0.916101, 0.0086517, -0.00777737, 0.400779)
+bones/55/rotation = Quaternion(-0.26343, -0.0629889, 0.150589, 0.950768)
+bones/56/rotation = Quaternion(0.00568097, 0.920268, -0.39124, -0.00241346)
+bones/58/rotation = Quaternion(0.644742, -0.149355, 0.126712, 0.738881)
+bones/59/rotation = Quaternion(0.924311, -0.0584057, -0.0943708, 0.365146)
+bones/60/position = Vector3(-4.19612e-10, 0.00449734, 1.65511e-11)
+bones/60/rotation = Quaternion(0.0149716, 0.0935415, -0.225348, 0.969662)
+bones/60/scale = Vector3(1, 1, 1)
+bones/61/rotation = Quaternion(-0.0057671, 0.934233, -0.356611, 0.00219897)
+
+[node name="RightLeg" type="SkeletonIK3D" parent="playermodel/metarig/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, -1.11022e-16, 1.86265e-09, 1, -7.10543e-15, 0, -1.42109e-14, 1, 0, 1.10815e-10, -0.000929585)
+influence = 0.8
+root_bone = &"spine.003"
+tip_bone = &"foot.R"
+target_node = NodePath("../RightFoot")
+min_distance = 1.0
+
+[node name="RightFoot" type="BoneAttachment3D" parent="playermodel/metarig/Skeleton3D" index="2"]
+transform = Transform3D(0.757116, 0.602712, 0.252014, -0.607788, 0.508438, 0.609987, 0.239512, -0.615001, 0.751267, -0.00161509, -0.00102884, 0.00693827)
+bone_name = "foot.R"
+bone_idx = 60
+
+[node name="RayCast3D" type="RayCast3D" parent="playermodel/metarig/Skeleton3D/RightFoot"]
+transform = Transform3D(0.00799616, 8.75718e-05, 0.0015004, -0.000475663, -0.00116582, 0.00490504, 0.00147326, -0.000851696, -0.00655982, -0.000124926, 0.00183384, 0.000192703)
+target_position = Vector3(0, -0.5, 0)
+
+[node name="LeftFoot" type="BoneAttachment3D" parent="playermodel/metarig/Skeleton3D" index="3"]
+transform = Transform3D(0.836578, -0.259922, -0.482258, 0.511748, 0.0565259, 0.857273, -0.195564, -0.96397, 0.180302, 0.0014124, -0.0013748, 0.00672068)
+bone_name = "foot.L"
+bone_idx = 55
+
+[node name="RayCast3D" type="RayCast3D" parent="playermodel/metarig/Skeleton3D/LeftFoot"]
+transform = Transform3D(-0.0106038, -0.000152753, 0.00299167, -0.00225121, -0.000858249, -0.00597181, 0.0037293, -0.00095242, 0.00490153, -0.000184881, 0.00186329, 0.000488827)
+target_position = Vector3(0, -0.5, 0)
+
+[node name="LeftLeg" type="SkeletonIK3D" parent="playermodel/metarig/Skeleton3D" index="4"]
+transform = Transform3D(1, 0, -1.11022e-16, 1.86265e-09, 1, -7.10543e-15, 0, -1.42109e-14, 1, 0, 1.10815e-10, -0.000929585)
+influence = 0.8
+root_bone = &"spine.003"
+tip_bone = &"foot.L"
+target_node = NodePath("../LeftFoot")
+min_distance = 1.0
+
+[node name="LeftArm" type="SkeletonIK3D" parent="playermodel/metarig/Skeleton3D" index="5"]
+root_bone = &"spine.003"
+tip_bone = &"hand.L"
+override_tip_basis = false
+target_node = NodePath("../../../../CameraPivot/Node3D")
+
+[node name="RightArm" type="SkeletonIK3D" parent="playermodel/metarig/Skeleton3D" index="6"]
+root_bone = &"spine.003"
+tip_bone = &"hand.R"
+override_tip_basis = false
+target_node = NodePath("../../../../CameraPivot/Node3D")
+
+[node name="Torso" type="SkeletonIK3D" parent="playermodel/metarig/Skeleton3D" index="7"]
+root_bone = &"spine"
+tip_bone = &"spine.003"
+target_node = NodePath("../../../../../CameraPivot/Node3D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="playermodel"]
+deterministic = true
+libraries = {
+"player": SubResource("AnimationLibrary_bjpom")
+}
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.75443e-08, 0, 1, 0, -8.75443e-08, 0, -1, 0.00924838, 1.75859, -0.0197285)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 0, -8.75443e-08, 0, 1, 0, 8.75443e-08, 0, -1, -0.00233869, 0.636339, -3.84791)
+current = true
+
+[node name="Node3D" type="Node3D" parent="CameraPivot"]
+transform = Transform3D(0.999999, 0.0012783, 5.32251e-05, -0.0012783, 0.996538, 0.0831289, 5.32251e-05, -0.0831289, 0.996539, -0.00099504, 0.0276098, 0.224233)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 664.0
+offset_top = 236.0
+offset_right = -661.0
+offset_bottom = -491.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_vc7kr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ev5m0")
+
+[editable path="playermodel"]
