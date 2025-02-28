@@ -1,11 +1,11 @@
-<img src="images/title.png" alt="Description" width="50%">
+<img src="images/title.png" alt="Description" width="100%">
 # 🧙‍♂️ Wizicka - A Magical Adventure ✨
 
 Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players harness the power of arcane magic to explore a mystical world, uncover secrets, and battle formidable foes. With an immersive environment, deep spell-casting mechanics, and a rich fantasy atmosphere, *Wizicka* is designed to captivate players with its engaging gameplay and fluid mechanics.
 
 ---
-![demo image 1](images/sc1.png)
 ![demo image 2](images/sc2.png)
+![demo image 2](images/sc4.png)
 ![demo image 3](images/sc3.png)
 ![wizicka v0.01](images/gif1.gif)
 ---
@@ -18,7 +18,7 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 ✅ **Dynamic Camera System** – Smooth, responsive camera movement to enhance immersion.  
 🔲 **Player Customization** – Unlock and equip different magical abilities.  
 ✅ **Procedural Terrain & Environments** – HALFWAY COMPLETE - Vast, varied landscapes dynamically generated.  
-🔲 **Multiplayer Mode (Planned)** – Cooperative gameplay for magical duels or team-based challenges.  
+✅ **Multiplayer Mode (Planned)** - WORKING – Cooperative gameplay for magical duels or team-based challenges.  
 🔲 **Rich Lore & Storytelling** – Uncover the mysteries of the world through NPCs, books, and artifacts.  
 
 ---
@@ -35,6 +35,9 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 ---
 
 ## Changelog
+
+![demo image 1](images/sc1.png)
+- v0.1: Refactored and started development over to clean and improve foundational code, added multiplayer, and developed a new map, no collision for any structures yet, but LAN Multiplayer is tested and working, need to smooth syncing and test to optimize network settings.
 
 - v0.02: Created initial starter area, with terrain, collision, lighting, and finished v1 of the third person player controller. Added placeholder player model and basic movement animations. 2.26.25
 
