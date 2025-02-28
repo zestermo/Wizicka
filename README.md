@@ -5,7 +5,7 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 
 ---
 ![demo image 2](images/sc2.png)
-![demo image 2](images/sc4.png)
+![demo image 2](images/sc5.png)
 ![wizicka v0.01](images/gif1.gif)
 ---
 ## 🌟 Features (Planned & Implemented)
