@@ -6,7 +6,6 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 ---
 ![demo image 2](images/sc2.png)
 ![demo image 2](images/sc4.png)
-![demo image 3](images/sc3.png)
 ![wizicka v0.01](images/gif1.gif)
 ---
 ## 🌟 Features (Planned & Implemented)
@@ -36,12 +35,15 @@ Wizicka is a spellbinding adventure game built in **Godot 4.3**, where players h
 
 ## Changelog
 
-![demo image 1](images/sc1.png)
-- v0.1: Refactored and started development over to clean and improve foundational code, added multiplayer, and developed a new map, no collision for any structures yet, but LAN Multiplayer is tested and working, need to smooth syncing and test to optimize network settings.
+## v0.1: Multiplayer! (2.27.25)
+<img src="images/sc1.png" alt="Description" width="50%">
+Refactored and started development over to clean and improve foundational code, added multiplayer, and developed a new map, no collision for any structures yet, but LAN Multiplayer is tested and working, need to smooth syncing and test to optimize network settings.
 
-- v0.02: Created initial starter area, with terrain, collision, lighting, and finished v1 of the third person player controller. Added placeholder player model and basic movement animations. 2.26.25
+## v0.02: Player Model and Animations (2.26.25)
+Created initial starter area, with terrain, collision, lighting, and finished v1 of the third person player controller. Added placeholder player model and basic movement animations. 
 
-- v0.01: Created basic starter area with a few assets and some trees, unfinished collision, place holder player character and unfinished player controller script. finished with v1 of the game world shaders (psx style dithering and pixelation). 2.23.25
+## v0.01: Getting Started (2.23.25)
+Created basic starter area with a few assets and some trees, unfinished collision, place holder player character and unfinished player controller script. finished with v1 of the game world shaders (psx style dithering and pixelation). 
 
 ## 🚀 Installation & Running the Game
 
