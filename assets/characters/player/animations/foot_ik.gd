@@ -11,12 +11,12 @@ extends Node3D
 @export var right_skeleton_ik: SkeletonIK3D
 
 # ✊ Combat Stance (Hand IK)
-@export var left_hand_ik: SkeletonIK3D
-@export var right_hand_ik: SkeletonIK3D
+#@export var left_hand_ik: SkeletonIK3D
+#@export var right_hand_ik: SkeletonIK3D
 
-@export var torso_ik: SkeletonIK3D
+#@export var torso_ik: SkeletonIK3D
 
-@export var reticle: Control  # UI reticle (Hidden when not in combat stance)
+#@export var reticle: Control  # UI reticle (Hidden when not in combat stance)
 
 # 🔧 IK Settings (Tweak in Inspector)
 @export var foot_offset: float = 0.1  # Prevents feet sinking into the ground
@@ -37,30 +37,30 @@ func _ready():
 		right_skeleton_ik.start()
 
 	# Make sure hand IK is disabled at the start
-	if left_hand_ik:
-		left_hand_ik.start()
-		left_hand_ik.interpolation = 0.0
-	if right_hand_ik:
-		right_hand_ik.start()
-		right_hand_ik.interpolation = 0.0
-	if torso_ik:
-		torso_ik.start()
-		torso_ik.interpolation = 0.0
+	#if left_hand_ik:
+		#left_hand_ik.start()
+		#left_hand_ik.interpolation = 0.0
+	#if right_hand_ik:
+		#right_hand_ik.start()
+		#right_hand_ik.interpolation = 0.0
+	#if torso_ik:
+		#torso_ik.start()
+		#torso_ik.interpolation = 0.0
 	
 	# Hide reticle at start
-	if reticle:
-		reticle.hide()
+	#if reticle:
+		#reticle.hide()
 
 func _input(event):
 	if event.is_action_pressed("spell_cast_mode"):
 		combat_mode = !combat_mode  # Toggle combat mode
 
 		# Show/hide reticle based on stance
-		if reticle:
-			if combat_mode:
-				reticle.show()
-			else:
-				reticle.hide()
+		#if reticle:
+			#if combat_mode:
+				#reticle.show()
+			#else:
+				#reticle.hide()
 
 func _process(delta):
 	# 🌱 FOOT IK - Adjust ground placement
@@ -86,12 +86,12 @@ func _process(delta):
 	var combat_target_weight = 1.0 if combat_mode else 0.0
 	combat_ik_weight = lerp(combat_ik_weight, combat_target_weight, delta * combat_ik_blend_speed)
 
-	if left_hand_ik:
-		left_hand_ik.interpolation = combat_ik_weight
-	if right_hand_ik:
-		right_hand_ik.interpolation = combat_ik_weight
-	if torso_ik:
-		torso_ik.interpolation = combat_ik_weight
+	#if left_hand_ik:
+		#left_hand_ik.interpolation = combat_ik_weight
+	#if right_hand_ik:
+		#right_hand_ik.interpolation = combat_ik_weight
+	#if torso_ik:
+		#torso_ik.interpolation = combat_ik_weight
 
 func adjust_foot_position(raycast: RayCast3D, foot_target: Node3D):
 	if raycast.is_colliding():
