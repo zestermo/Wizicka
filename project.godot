@@ -8,6 +8,10 @@
 
 config_version=5
 
+[SimpleGrassTextured]
+
+Shortcuts/size/borderless=false
+
 [TemplateOnlineMultiplayer]
 
 config/ninetailsrabbit.terrainy/update_notification_enabled=true
@@ -29,11 +33,12 @@ SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 [display]
 
 window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_height=1280
+window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/addons/scene_object_brush/plugin.cfg", "res://addons/ninetailsrabbit.terrainy/plugin.cfg", "res://addons/simplegrasstextured/plugin.cfg")
+enabled=PackedStringArray("res://addons/SunshineVolumetricClouds/plugin.cfg", "res://addons/addons/scene_object_brush/plugin.cfg", "res://addons/simplegrasstextured/plugin.cfg")
 
 [input]
 

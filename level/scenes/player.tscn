@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cffjduipbb3s5"]
+[gd_scene load_steps=12 format=3 uid="uid://cffjduipbb3s5"]
 
 [ext_resource type="Script" path="res://assets/characters/player/scenes/playermulti.gd" id="1_oqg6j"]
 [ext_resource type="PackedScene" uid="uid://gbxothbwpvrp" path="res://assets/characters/player/animations/Man_01_02.fbx" id="5_nim4l"]
@@ -7,9 +7,6 @@
 [ext_resource type="Animation" uid="uid://d1pgqa00j644x" path="res://assets/characters/player/animations/jog.res" id="8_dv2ts"]
 [ext_resource type="Animation" uid="uid://d4gaw1kjbd4gk" path="res://assets/characters/player/animations/jump_start.res" id="9_13qb7"]
 [ext_resource type="Animation" uid="uid://b8xv01p83uv65" path="res://assets/characters/player/animations/run.res" id="10_117yl"]
-[ext_resource type="Shader" path="res://level/scenes/pixelation.gdshader" id="10_xurh6"]
-[ext_resource type="Texture2D" uid="uid://on7q15r0muyi" path="res://assets/characters/player/reticlewhite.png" id="11_5kwi6"]
-[ext_resource type="Script" path="res://level/scenes/color_rect.gd" id="11_in5i5"]
 [ext_resource type="Script" path="res://assets/characters/player/camera_controller.gd" id="11_vmi38"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mx45w"]
@@ -35,11 +32,6 @@ _data = {
 "jump_start": ExtResource("9_13qb7"),
 "run": ExtResource("10_117yl")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2kgxu"]
-shader = ExtResource("10_xurh6")
-shader_parameter/pixel_size = 4
-shader_parameter/screen_size = Vector2(1920, 1080)
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_model", "camera_pivot", "anim_player", "camera")]
 transform = Transform3D(-0.652269, 0, -5.70231e-08, 0, 0.652269, 0, 5.70231e-08, 0, -0.652269, 0, 0, 0)
@@ -86,7 +78,6 @@ bones/4/position = Vector3(4.37102e-17, 0.00132025, -2.81696e-11)
 bones/4/rotation = Quaternion(0.409043, -5.83998e-15, 9.75235e-08, 0.912515)
 bones/5/position = Vector3(2.49267e-16, 0.000952363, -1.01431e-09)
 bones/5/rotation = Quaternion(-0.285058, 1.76059e-14, -6.79632e-08, 0.95851)
-bones/5/scale = Vector3(1, 1, 1)
 bones/7/position = Vector3(0.00191667, 0.000364626, -0.000267266)
 bones/7/rotation = Quaternion(0.0308157, -0.0540157, 0.954426, -0.291895)
 bones/7/scale = Vector3(1, 1, 1)
@@ -133,10 +124,8 @@ bones/26/position = Vector3(-3.55823e-05, 0.00109453, -0.000383685)
 bones/26/rotation = Quaternion(0.188615, 0.571832, -0.296191, 0.74142)
 bones/27/position = Vector3(2.19105e-11, 0.000278761, -2.06498e-10)
 bones/27/rotation = Quaternion(0.0435089, -0.0134622, -0.0164545, 0.998827)
-bones/27/scale = Vector3(1, 1, 1)
 bones/28/position = Vector3(7.90434e-11, 0.000225926, -2.59034e-10)
 bones/28/rotation = Quaternion(0.0862694, -0.0134786, -0.0156442, 0.996058)
-bones/28/scale = Vector3(1, 1, 1)
 bones/30/position = Vector3(-0.00191667, 0.000364626, -0.000267267)
 bones/30/rotation = Quaternion(-0.0308158, -0.0540158, 0.954427, 0.291895)
 bones/30/scale = Vector3(1, 1, 1)
@@ -224,6 +213,7 @@ libraries = {
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.75443e-08, 0, 1, 0, -8.75443e-08, 0, -1, 0.00924838, 1.75859, -0.0197285)
 script = ExtResource("11_vmi38")
+zoom_speed = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-1, 0, -8.75443e-08, 0, 1, 0, 8.75443e-08, 0, -1, -0.00233869, 0.636339, -3.84791)
@@ -231,44 +221,5 @@ current = true
 
 [node name="Node3D" type="Node3D" parent="CameraPivot"]
 transform = Transform3D(0.999999, 0.0012783, 5.32251e-05, -0.0012783, 0.996538, 0.0831289, 5.32251e-05, -0.0831289, 0.996539, -0.00099504, 0.0276098, 0.224233)
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="TextureRect" type="TextureRect" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 664.0
-offset_top = 236.0
-offset_right = -661.0
-offset_bottom = -491.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("11_5kwi6")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-z_index = 1
-material = SubResource("ShaderMaterial_2kgxu")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("11_in5i5")
-metadata/_edit_use_anchors_ = true
 
 [editable path="playermodel"]

@@ -1,17 +1,17 @@
 extends Node3D
 
-@onready var skin_input: LineEdit = $Menu/MainContainer/MainMenu/Option2/SkinInput
-@onready var nick_input: LineEdit = $Menu/MainContainer/MainMenu/Option1/NickInput
-@onready var address_input: LineEdit = $Menu/MainContainer/MainMenu/Option3/AddressInput
+@onready var skin_input: LineEdit = $CanvasLayer/Menu/MainContainer/MainMenu/Option2/SkinInput
+@onready var nick_input: LineEdit = $CanvasLayer/Menu/MainContainer/MainMenu/Option1/NickInput
+@onready var address_input: LineEdit = $CanvasLayer/Menu/MainContainer/MainMenu/Option3/AddressInput
 @onready var players_container: Node3D = $PlayersContainer
-@onready var menu: Control = $Menu
+@onready var menu: Control = $CanvasLayer/Menu
 @export var player_scene: PackedScene
 
 # multiplayer chat
-@onready var message: LineEdit = $MultiplayerChat/Message
-@onready var send: Button = $MultiplayerChat/Send
-@onready var chat: TextEdit = $MultiplayerChat/Chat
-@onready var multiplayer_chat: Control = $MultiplayerChat
+@onready var message: LineEdit = $CanvasLayer/MultiplayerChat/Message
+@onready var send: Button = $CanvasLayer/MultiplayerChat/Send
+@onready var chat: TextEdit = $CanvasLayer/MultiplayerChat/Chat
+@onready var multiplayer_chat: Control = $CanvasLayer/MultiplayerChat
 var chat_visible = false
 
 func _ready():
