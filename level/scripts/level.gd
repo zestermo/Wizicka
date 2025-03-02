@@ -27,8 +27,8 @@ func _ready():
 func _on_player_connected(peer_id, player_info):
 	for id in Network.players.keys():
 		var player_data = Network.players[id]
-		if id != peer_id:
-			rpc_id(peer_id, "sync_player_skin", id, player_data["skin"])
+		#if id != peer_id:
+			#rpc_id(peer_id, "sync_player_skin", id, player_data["skin"])
 			
 	_add_player(peer_id, player_info)
 	
@@ -47,12 +47,12 @@ func _add_player(id: int, player_info : Dictionary):
 	player.name = str(id)
 	player.position = get_spawn_point()
 	players_container.add_child(player, true)
-	
+	player.add_to_group("player")
 	var nick = Network.players[id]["nick"]
 	player.rpc("change_nick", nick)
-	
-	var skin_name = player_info["skin"]
-	rpc("sync_player_skin", id, skin_name)
+	print(player)
+	#var skin_name = player_info["skin"]
+	#rpc("sync_player_skin", id, skin_name)
 	
 	rpc("sync_player_position", id, player.position)
 	
@@ -73,12 +73,12 @@ func sync_player_position(id: int, new_position: Vector3):
 	if player:
 		player.position = new_position
 		
-@rpc("any_peer", "call_local")
-func sync_player_skin(id: int, skin_name: String):
-	if id == 1: return # ignore host
-	var player = players_container.get_node(str(id))
-	if player:
-		player.set_player_skin(skin_name)
+#@rpc("any_peer", "call_local")
+#func sync_player_skin(id: int, skin_name: String):
+	#if id == 1: return # ignore host
+	#var player = players_container.get_node(str(id))
+	#if player:
+		#player.set_player_skin(skin_name)
 		
 func _on_quit_pressed() -> void:
 	get_tree().quit()

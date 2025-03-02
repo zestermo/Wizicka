@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://assets/characters/player/camera_controller.gd" id="11_vmi38"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mx45w"]
-radius = 0.389842
-height = 1.92513
+radius = 0.308286
+height = 1.82374
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wb3a5"]
 properties/0/path = NodePath(".:position")
@@ -223,7 +223,7 @@ tip_bone = &"toe.R"
 target_node = NodePath("../RightFoot")
 
 [node name="LeftFoot" type="BoneAttachment3D" parent="playermodel/metarig/Skeleton3D" index="3"]
-transform = Transform3D(0.944733, 0.246846, -0.215731, 0.32026, -0.554318, 0.768218, 0.0700477, -0.794857, -0.60274, 0.00246054, -0.000361699, 0.00183627)
+transform = Transform3D(0.944733, 0.246846, -0.215731, 0.32026, -0.554318, 0.768217, 0.0700478, -0.794857, -0.60274, 0.00246054, -0.000361693, 0.00183627)
 bone_name = "foot.L"
 bone_idx = 55
 
@@ -232,7 +232,7 @@ transform = Transform3D(0.0070612, -0.000843856, -0.00368815, -0.00528816, -0.00
 target_position = Vector3(0, -0.1, 0)
 
 [node name="RightFoot" type="BoneAttachment3D" parent="playermodel/metarig/Skeleton3D" index="4"]
-transform = Transform3D(0.932115, -0.174685, 0.317243, -0.359747, -0.547518, 0.755514, 0.0417191, -0.818356, -0.573194, -0.000496926, 0.000509669, 0.00170395)
+transform = Transform3D(0.932116, -0.174686, 0.317243, -0.359747, -0.54752, 0.755513, 0.041719, -0.818355, -0.573196, -0.000496928, 0.000509664, 0.00170395)
 bone_name = "foot.R"
 bone_idx = 60
 

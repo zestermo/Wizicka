@@ -11,6 +11,22 @@ const MAX_COMBAT_ROTATION = 0.4
 const ANIMATION_BLEND_TIME = 0.2
 const LERP_VELOCITY: float = 0.15  # For smooth rotation
 
+# Health, Mana, and Stamina
+@export var max_health: int = 100
+@export var max_mana: int = 100
+@export var max_stamina: int = 100
+
+var health: int = max_health
+var mana: int = max_mana
+var stamina: int = max_stamina
+
+@export var mana_regen_rate: float = 5.0  # Mana regenerates per second
+@export var stamina_regen_rate: float = 10.0  # Stamina regenerates per second
+@export var stamina_drain_sprint: float = 20.0  # Stamina drain per second while sprinting
+@export var stamina_regen_delay: float = 1.5  # Delay before stamina starts regenerating
+
+var stamina_regen_timer: float = 0.0
+
 @onready var nickname: Label3D = $PlayerNick/Nickname  
 
 @export var move_speed = BASE_SPEED
@@ -44,28 +60,37 @@ func _ready():
 		camera.current = false
 
 func _physics_process(delta: float) -> void:
-	# 🔥 **Handle movement for the local player**
 	if is_multiplayer_authority():
 		handle_local_movement(delta)
-		rpc_id(0, "update_position", position, player_model.rotation.y)  # Send to all peers
+		handle_resource_regen(delta)
+		rpc_id(0, "update_position", position, player_model.rotation.y)
 		var current_anim = anim_player.current_animation
 		rpc_id(0, "sync_animation", current_anim)
 	else:
-		# 🔄 **For remote players, smooth movement & rotation**
 		position = position.lerp(network_position, delta * interpolation_speed)
-		player_model.rotation.y = lerp_angle(player_model.rotation.y, network_rotation, delta * 5.0)  # Smooth rotation
+		player_model.rotation.y = lerp_angle(player_model.rotation.y, network_rotation, delta * 5.0)
 
 	_check_fall_and_respawn()
 	move_and_slide()
 
+func _check_fall_and_respawn():
+	if global_transform.origin.y < -15.0:
+		_respawn()
+
+func handle_resource_regen(delta: float):
+	mana = min(max_mana, mana + mana_regen_rate * delta)
+	if stamina < max_stamina:
+		if stamina_regen_timer > 0:
+			stamina_regen_timer -= delta
+		else:
+			stamina = min(max_stamina, stamina + stamina_regen_rate * delta)
+
 @rpc("any_peer", "unreliable")
 func sync_animation(anim_name: String):
-	if not is_multiplayer_authority():  # Ignore local player animations
+	if not is_multiplayer_authority():
 		_play_animation(anim_name)
 
-# 🏃 **Handles Local Player Movement**
 func handle_local_movement(delta: float):
-	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		if not has_played_jump:
@@ -74,43 +99,56 @@ func handle_local_movement(delta: float):
 		elif anim_player.current_animation != "player/jump_start":
 			_play_animation("player/falling")
 
-	# Sprinting
-	move_speed = SPRINT_SPEED if Input.is_action_pressed("sprint") and not combat_stance else BASE_SPEED
-
-	# Jumping
+	move_speed = SPRINT_SPEED if Input.is_action_pressed("sprint") and not combat_stance and stamina > 0 else BASE_SPEED
+	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		is_jumping = true
 		has_played_jump = false
 		velocity.y = JUMP_VELOCITY
 		_play_animation("player/jump_start")
-
-	# Movement Input
+	
+	if move_speed == SPRINT_SPEED:
+		stamina = max(0, stamina - stamina_drain_sprint * delta)
+		stamina_regen_timer = stamina_regen_delay
+	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var camera_basis = camera_pivot.global_transform.basis
 	var move_dir = (camera_basis * Vector3(-input_dir.x, 0, -input_dir.y)).normalized()
 	move_dir.y = 0
 	move_dir = move_dir.normalized()
 
-	# Adjust acceleration in air
 	var current_acceleration = acceleration
 	if not is_on_floor():
 		current_acceleration *= AIR_CONTROL
 
-	# 🔥 **Fix Sliding & Improve Direction Switching**
 	if move_dir.length() > 0.01:
 		velocity.x = move_dir.x * move_speed
 		velocity.z = move_dir.z * move_speed
 
-		# Smooth rotation update
 		var target_rotation = atan2(-move_dir.x, -move_dir.z)
 		player_model.rotation.y = lerp_angle(player_model.rotation.y, target_rotation, turn_speed * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 		velocity.z = move_toward(velocity.z, 0, FRICTION * delta)
 
-	# 🔄 Smooth rotation
 	apply_rotation(velocity)
 	animate(velocity)
+
+func _respawn():
+	global_transform.origin = _respawn_point
+	velocity = Vector3.ZERO
+	health = max_health
+	mana = max_mana
+	stamina = max_stamina
+
+func take_damage(amount: int):
+	health = max(0, health - amount)
+	if health == 0:
+		_respawn()
+
+func _play_animation(anim_name: String):
+	if anim_player and anim_player.current_animation != anim_name:
+		anim_player.play(anim_name, -1, 1.0)
 
 # 🔄 **Smoothly rotates character based on velocity**
 func apply_rotation(_velocity: Vector3) -> void:
@@ -132,6 +170,11 @@ func animate(_velocity: Vector3) -> void:
 	
 	_play_animation("player/idle")
 
+# 📡 Multiplayer sync for player rotation
+@rpc("any_peer", "reliable")
+func sync_player_rotation(rotation_y: float):
+	player_model.rotation.y = rotation_y
+	
 # 📡 **Multiplayer Sync for Position & Rotation**
 @rpc("authority", "unreliable")
 func update_position(pos: Vector3, rot: float):
@@ -139,31 +182,8 @@ func update_position(pos: Vector3, rot: float):
 		network_position = pos  # Update latest position
 		network_rotation = rot  # Update latest rotation
 
-# 📡 Multiplayer sync for player rotation
-@rpc("any_peer", "reliable")
-func sync_player_rotation(rotation_y: float):
-	player_model.rotation.y = rotation_y
-
-# 📌 **Handles falling below world & respawning**
-func _check_fall_and_respawn():
-	if global_transform.origin.y < -15.0:
-		_respawn()
-
-func _respawn():
-	global_transform.origin = _respawn_point
-	velocity = Vector3.ZERO
-
 # 📡 **Nick & Skin Sync (Placeholder)**
 @rpc("any_peer", "reliable")
 func change_nick(new_nick: String):
 	if nickname:
 		nickname.text = new_nick
-
-@rpc("any_peer", "reliable")
-func set_player_skin(skin_name: String):
-	return
-
-# 🌀 **Animation helper function**
-func _play_animation(anim_name: String):
-	if anim_player and anim_player.current_animation != anim_name:
-		anim_player.play(anim_name, -1, 1.0)
