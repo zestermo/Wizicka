@@ -22,7 +22,7 @@ config/name="Wizicka"
 config/description="A 3rd Person Fantasy RPG"
 config/tags=PackedStringArray("3d", "network")
 run/main_scene="res://level/scenes/level.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://images/title_icon.png"
 
 [autoload]

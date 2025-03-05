@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://gvlo6b7vrcb5"]
 
 [ext_resource type="PackedScene" uid="uid://gbxothbwpvrp" path="res://assets/characters/player/animations/Man_01_02.fbx" id="1_qwqeu"]
-[ext_resource type="Script" path="res://assets/characters/player/animations/foot_ik.gd" id="2_ukmlf"]
+[ext_resource type="Script" uid="uid://dfc6m7rkt4ftc" path="res://assets/characters/player/animations/foot_ik.gd" id="2_ukmlf"]
 [ext_resource type="Animation" uid="uid://drijar4b4kynp" path="res://assets/characters/player/animations/falling.res" id="3_8vc3e"]
 [ext_resource type="Animation" uid="uid://dcnj3ju0ko5bu" path="res://assets/characters/player/animations/idle.res" id="4_quv14"]
 [ext_resource type="Animation" uid="uid://d1pgqa00j644x" path="res://assets/characters/player/animations/jog.res" id="5_ncd4p"]
@@ -11,11 +11,11 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bjpom"]
 _data = {
-"falling": ExtResource("3_8vc3e"),
-"idle": ExtResource("4_quv14"),
-"jog": ExtResource("5_ncd4p"),
-"jump_start": ExtResource("6_rltrw"),
-"run": ExtResource("7_0d86t")
+&"falling": ExtResource("3_8vc3e"),
+&"idle": ExtResource("4_quv14"),
+&"jog": ExtResource("5_ncd4p"),
+&"jump_start": ExtResource("6_rltrw"),
+&"run": ExtResource("7_0d86t")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev5m0"]
